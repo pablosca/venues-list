@@ -28,7 +28,15 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "arrow-parens": 0,
+      "generator-star-spacing": 0,
+      "semi": [1, "always"],
+      "no-unused-vars": 1,
+      "no-multiple-empty-lines": 1,
+      "comma-dangle": [1, "always-multiline"],
+      "space-before-function-paren": [1, "never"]
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }
