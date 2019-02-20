@@ -1,4 +1,5 @@
 $btn-bg: #00b70a;
+$sort-btn-bg: rgb(230, 230, 230);
 
 // animations
 @keyframes loading {
@@ -97,22 +98,25 @@ li:not(:first-child) {
     }
 }
 
-.venues-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 1.5rem;
+.venues-section {
     opacity: 0;
     padding: 0 1.5rem 1.5rem;
     transform: translateY(35vh);
     transition: .5s;
-    
-    @media (min-width: 768px) {
-        grid-template-columns: repeat(3, 1fr);
-    }
 
     .has-results & {
         transform: translateY(5vh);
         opacity: 1;
+    }
+}
+
+.venues-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1.5rem;
+    
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
@@ -138,4 +142,64 @@ li:not(:first-child) {
 .venue-categories {
     font-size: .8rem;
     margin: auto 0 0;
+}
+
+.bar {
+    margin-bottom: 1.5rem;
+    
+    @media (max-width: 767px) {
+        text-align: center;
+    }
+
+    @media (min-width: 768px) {
+        align-items: flex-end;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.sort-nav {
+    align-items: center;
+    display: flex;
+    font-size: .8rem;
+    justify-content: flex-end;
+    
+    @media (max-width: 767px) {
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    button {
+        background: $sort-btn-bg;
+        border: 1px solid #ccc;
+        cursor: pointer;
+        color: #333;
+        font-size: .9rem;
+        padding: .6rem 1.2rem;
+        text-transform: capitalize;
+        transition: .3s;
+
+        &:hover {
+            background: lighten($sort-btn-bg, 5%);
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        &:first-child {
+            border-radius: 2rem 0 0 2rem;
+            border-right: none;
+            margin-left: 1rem;
+        }
+
+        &:last-child {
+            border-radius: 0 2rem 2rem 0;
+        }
+
+        &.selected {
+            background: #fff;
+            color: #000;
+        }
+    }
 }

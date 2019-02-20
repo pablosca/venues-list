@@ -5,12 +5,14 @@ import {
     faSpinner,
     faMapMarkerAlt,
     faMap,
+    faLocationArrow,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
     faSpinner,
     faMapMarkerAlt,
     faMap,
+    faLocationArrow,
 );
 
 Vue.component('icon', FontAwesomeIcon);
