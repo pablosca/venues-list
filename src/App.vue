@@ -80,7 +80,7 @@ export default {
         this.waiting = false;
         this.loading = false;
 
-        alert(error);
+        alert('An error happened, please try again later.');
       }
     },
   },
