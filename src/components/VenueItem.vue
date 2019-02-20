@@ -2,12 +2,19 @@
   <div class="venue-card">
     <h3 class="venue-title" v-text="venue.name" />
 
-    <ul>
-      <li>{{ address }}</li>
-      <li>
-        {{ categories }}
-      </li>
-    </ul>
+    <p class="venue-address">
+      <icon icon="map-marker-alt" />
+      {{ address }}
+    </p>
+
+    <p class="venue-address">
+      <icon icon="map" />
+      {{ distance }} away
+    </p>
+
+    <p class="venue-categories">
+      Categories: {{ categories }}
+    </p>
     
   </div>
 </template>
@@ -35,7 +42,7 @@ export default {
     distance() {
       const kms = this.venue.location.distance / 1000; // distance from FourSquare is in meteres
 
-      return `${kms} kms`;
+      return `${kms.toFixed(2)} kms`;
     },
 
     categories() {

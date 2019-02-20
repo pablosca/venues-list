@@ -5,6 +5,8 @@ import 'roboto-fontface/css/roboto/sass/roboto-fontface.scss';
 import 'normalize.css';
 import '@/main.scss';
 
+import './icons';
+
 Vue.config.productionTip = false;
 
 new Vue({

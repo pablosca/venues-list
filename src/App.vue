@@ -4,11 +4,17 @@
       <h1 class="title">Venues List</h1>
 
       <button
-        :class="['btn', { loading }]"
+        :class="['btn', { 'loading': isBtnLoading }]"
         :disabled="isBtnDisabled"
-        v-text="buttonText"
         @click="onSeeVenues"
-      />
+      >
+        <span v-if="!loading" v-text="buttonText" />
+        <icon
+          icon="spinner"
+          spin
+          v-else
+        />
+      </button>
     </header>
 
     <venues-list :list="list" />
@@ -28,16 +34,21 @@ export default {
     return {
       list: [],
       loading: false,
+      waiting: false,
     };
   },
 
   computed: {
     buttonText() {
-      return !this.loading ? 'See venues around me' : 'Loading...';
+      return this.waiting ? 'Getting Location' : 'See venues around me';
     },
 
     hasResults() {
       return this.list.length;
+    },
+
+    isBtnLoading() {
+      return this.waiting || this.loading;
     },
 
     isBtnDisabled() {
@@ -53,20 +64,23 @@ export default {
     },
 
     async onSeeVenues() {
-      this.loading = true;
+      this.waiting = true;
 
       try {
         const { coords } = await this.getPosition();
-        const { data } = await getVenues(coords);
+        this.waiting = false;
+        this.loading = true;
 
+        const { data } = await getVenues(coords);
         this.list = data.response.groups[0].items;
 
         this.loading = false;
       }
       catch(error) {
-        console.log(error);
-
+        this.waiting = false;
         this.loading = false;
+
+        alert(error);
       }
     },
   },
