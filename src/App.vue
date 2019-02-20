@@ -40,7 +40,7 @@ export default {
 
   computed: {
     buttonText() {
-      return this.waiting ? 'Getting Location' : 'See venues around me';
+      return this.waiting ? 'Getting Location...' : 'See venues around me';
     },
 
     hasResults() {
