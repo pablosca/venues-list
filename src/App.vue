@@ -1,12 +1,14 @@
 <template>
-  <div id="app">
-
+  <div id="app" :class="['app', { 'has-results': hasResults }]">
     <header class="header">
-      <h1 class="title">Find the closest venues to you</h1>
+      <h1 class="title">Venues List</h1>
 
-      <button class="btn" @click="onSeeVenues">
-        See venues close to me
-      </button>
+      <button
+        :class="['btn', { loading }]"
+        :disabled="isBtnDisabled"
+        v-text="buttonText"
+        @click="onSeeVenues"
+      />
     </header>
 
     <venues-list :list="list" />
@@ -25,7 +27,22 @@ export default {
   data() {
     return {
       list: [],
+      loading: false,
     };
+  },
+
+  computed: {
+    buttonText() {
+      return !this.loading ? 'See venues around me' : 'Loading...';
+    },
+
+    hasResults() {
+      return this.list.length;
+    },
+
+    isBtnDisabled() {
+      return this.hasResults || this.loading; 
+    },
   },
 
   methods: {
@@ -36,14 +53,20 @@ export default {
     },
 
     async onSeeVenues() {
+      this.loading = true;
+
       try {
         const { coords } = await this.getPosition();
         const { data } = await getVenues(coords);
 
         this.list = data.response.groups[0].items;
+
+        this.loading = false;
       }
       catch(error) {
         console.log(error);
+
+        this.loading = false;
       }
     },
   },

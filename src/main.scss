@@ -1,3 +1,29 @@
+$btn-bg: #00b70a;
+
+// animations
+@keyframes loading {
+    0% {
+        background: darken($btn-bg, 8%);
+    }
+    50% {
+        background: lighten($btn-bg, 3%);
+    }
+
+    100% {
+        background: darken($btn-bg, 8%);
+    }
+}
+
+// vue fade transition
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+
+// general
 html {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
@@ -5,33 +31,79 @@ html {
 
 body {
     background: #f4f9ff;
-    padding: 2rem;
+}
+
+.app {
+    height: 100vmin;
 }
 
 .header {
-    margin-bottom: 3rem;
     text-align: center;
+    transform: translateY(35vh);
+    transition: .5s;
+
+    .has-results & {
+        transform: translateY(8vh);
+    }
 }
 
 .title {
-    margin-bottom: 2rem;
+    margin: 0 0 1.5rem;
 }
 
 .btn {
-    background: #ccc;
+    background: $btn-bg;
     border: none;
     border-radius: 2rem;
-    color: #333;
+    color: #fff;
     cursor: pointer;
-    font-size: 1.1rem;
-    font-weight: bold;
-    padding: .8rem 1.5rem;
+    font-size: 1.15rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    min-width: 21rem;
+    padding: 1.2rem 3.8rem;
+    transition: .3s;
+
+    &:hover {
+        background: darken($btn-bg, 3%);;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &[disabled] {
+        pointer-events: none;
+    }
+
+    &.loading {
+        animation: loading 2s infinite linear;
+    }
+
+    .has-results & {
+        height: 0;
+        opacity: 0;
+        transform: translateY(-2.5rem)
+    }
 }
 
 .venues-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     grid-gap: 1.5rem;
+    opacity: 0;
+    padding: 0 1.5rem;
+    transform: translateY(35vh);
+    transition: .5s;
+    
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .has-results & {
+        transform: translateY(5vh);
+        opacity: 1;
+    }
 }
 
 .venue-card {

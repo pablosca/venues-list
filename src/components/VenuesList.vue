@@ -1,5 +1,5 @@
 <template>
-  <section class="venues-list" v-if="hasVenues">
+  <section class="venues-list">
     <venue-item
       v-for="(item, index) in list"
       :key="index"
@@ -17,12 +17,6 @@ export default {
   },
 
   components: { VenueItem },
-
-  computed: {
-    hasVenues() {
-      return this.list.length;
-    },
-  },
 };
 </script>
 
