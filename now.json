@@ -1,0 +1,17 @@
+{
+    "name": "venues-list",
+    "type": "static",
+    "static": {
+      "public": "dist",
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    "alias": "venues-list",
+    "files": [
+      "dist"
+    ]
+  }
